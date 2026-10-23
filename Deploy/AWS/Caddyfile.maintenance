@@ -1,0 +1,3 @@
+mongster-game.net {
+    respond "Game API deployment pending" 503
+}

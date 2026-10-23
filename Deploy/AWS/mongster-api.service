@@ -1,0 +1,23 @@
+[Unit]
+Description=Mongster authentication and game API scaffold
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=mongster
+Group=mongster
+WorkingDirectory=/opt/mongster
+EnvironmentFile=/etc/mongster/api.env
+ExecStart=/opt/mongster/.venv/bin/uvicorn NetworkHost.Operations.api:create_default_app --factory --host 127.0.0.1 --port 8080 --workers 1 --proxy-headers --forwarded-allow-ips 127.0.0.1 --no-access-log
+Restart=on-failure
+RestartSec=5
+StateDirectory=mongster
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

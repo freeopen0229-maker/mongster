@@ -1,0 +1,26 @@
+name: Auth scaffold validation
+on:
+  push:
+    paths:
+      - 'NetworkHost/Operations/**'
+      - '.github/workflows/auth_scaffold.yml'
+  pull_request:
+    paths:
+      - 'NetworkHost/Operations/**'
+      - '.github/workflows/auth_scaffold.yml'
+permissions:
+  contents: read
+jobs:
+  authentication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Install isolated scaffold test dependencies
+        run: |
+          python3 -m venv /tmp/auth-test
+          /tmp/auth-test/bin/pip install -r NetworkHost/Operations/requirements.txt httpx
+      - name: Validate auth and atomic adapter boundaries
+        run: /tmp/auth-test/bin/python -m unittest NetworkHost.Operations.test_operations -v

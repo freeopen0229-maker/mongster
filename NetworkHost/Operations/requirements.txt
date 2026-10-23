@@ -1,0 +1,5 @@
+# Scaffold constraints. Produce a reviewed, pinned deployment lock before release.
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+google-auth>=2,<3
+requests>=2.32,<3
