@@ -31,6 +31,8 @@ namespace Mongle.Slice
         public double Hunger = 80, Affection = 50, Fatigue = 10;
         public double UnclaimedIdleSeconds, PendingIdleCoins, PendingIdleXp;
         public bool IsListed, IsBusy, IsLocked;
+        public string ExplorationId = "";
+        public long ExplorationEndUtc;
         public string CostumeId = ""; // 렌더링에만 사용. 능력치 함수는 읽지 않는다.
         public PetTradeData Trade;
 
@@ -40,12 +42,16 @@ namespace Mongle.Slice
         }
         public void Validate()
         {
+            // Backward-compatible absence in existing server snapshots.
+            if(ExplorationId==null&&ExplorationEndUtc==0)ExplorationId="";
             if(SchemaVersion!=1||!PetIds.Valid(PetId)||!PetIds.Valid(OwnerAccountId)||Revision<0||LastUtc<0||
                LastCareFeedUtc<0||LastCarePetUtc<0||LastCarePlayUtc<0||SpeciesId<0||SpeciesId>129||Level<1||Level>100||Experience<0||
                !Enum.IsDefined(typeof(GrowthStage),Stage)||!Enum.IsDefined(typeof(PetGrade),Grade)||
                !Enum.IsDefined(typeof(PetPersonality),Personality)||Individual==null||!Individual.IsValid||
                PotentialPermille<900||PotentialPermille>1100||!Range(Hunger,0,100)||!Range(Affection,0,100)||!Range(Fatigue,0,100)||
                !Range(UnclaimedIdleSeconds,0,PetRules.MaxIdleSeconds)||!Range(PendingIdleCoins,0,1000000)||!Range(PendingIdleXp,0,1000000)||
+               ExplorationId==null||ExplorationEndUtc<0||
+               (ExplorationId!=""&&(!PetIds.Valid(ExplorationId)||!IsBusy||ExplorationEndUtc==0))||
                CostumeId==null||CostumeId.Length>80||Trade==null)
                 throw new InvalidOperationException("Invalid pet snapshot.");
             Trade.Validate(OwnerAccountId);

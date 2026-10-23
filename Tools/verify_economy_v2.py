@@ -12,7 +12,7 @@ if (prefix.parent/'etc/mono/config').exists():env['MONO_CFG_DIR']=str(prefix.par
 env['LD_LIBRARY_PATH']=str(prefix/'lib')+os.pathsep+env.get('LD_LIBRARY_PATH','')
 sources=sorted((root/'Assets/Scripts/SliceShared').glob('*.cs'))+sorted((root/'Assets/Scripts/EconomyV2').glob('*.cs'))+sorted((root/'ServerSources').rglob('*.cs'))
 records=[]
-for name in ['EconomyV2Probe','SliceProbe','ClientEconomyProbe','HatchPresentationProbe']:
+for name in ['EconomyV2Probe','SliceProbe','ClientEconomyProbe','HatchPresentationProbe','PetLoopProbe']:
     exe=out/(name+'.exe')
     args=[mono,compiler,'-r:System.Core','-out:'+str(exe),*sources,root/'Tools'/(name+'.cs')]
     for phase,command in [('Compile',args),('Run',[mono,exe])]:

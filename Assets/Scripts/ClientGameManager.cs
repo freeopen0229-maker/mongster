@@ -31,6 +31,7 @@ namespace FusionTamagotchi.Client
         public UserWalletDTO wallet {get;private set;}=new UserWalletDTO();
         public PetDTO SelectedPet=>session?.Pet;
         public EggDTO SelectedEgg=>session?.Egg;
+        public bool HasPending=>session!=null&&session.HasPending;
         public bool isProcessing=>session!=null&&session.IsBusy;
         public event Action<string[]> EggsPurchased;
         public event Action<PetDTO> PetUpdated,PetHatched;
@@ -140,6 +141,12 @@ namespace FusionTamagotchi.Client
                 SetStatus((e is OperationCanceledException?"요청이 중단됐습니다.":e.Message)+suffix);
             }
             finally{if(g==generation)UpdateControls();}
+        }
+        public void ClearSession()
+        {
+            generation++;lifetime?.Cancel();lifetime?.Dispose();lifetime=isActiveAndEnabled?new CancellationTokenSource():null;
+            if(session!=null){session.Changed-=Render;session.PendingChanged-=SavePending;}
+            session=null;accountId=null;initialized=false;wallet=new UserWalletDTO();Render();
         }
         void RequireSession(){if(session==null||!isActiveAndEnabled)throw new InvalidOperationException("로그인 및 서버 연결이 필요합니다.");}
         void Render()

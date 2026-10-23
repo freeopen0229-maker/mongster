@@ -6,7 +6,7 @@ namespace FusionTamagotchi.Client
     public sealed class EconomyPlaygroundControls:MonoBehaviour
     {
         public ClientGameManager manager;public HttpEconomyGateway gateway;
-        public InputField endpoint,account,accessToken,assetId;
+        public InputField account,accessToken,assetId;
         public Text status;
         void OnEnable(){if(manager)manager.EggsPurchased+=SelectFirstEgg;}
         void OnDisable(){if(manager)manager.EggsPurchased-=SelectFirstEgg;}
@@ -14,7 +14,7 @@ namespace FusionTamagotchi.Client
         {
             try
             {
-                gateway.ConfigureSession(endpoint.text.Trim(),accessToken.text.Trim());
+                gateway.ConfigureSession(NetworkConfig.Load().apiBaseUrl,accessToken.text.Trim());
                 manager.Initialize(account.text.Trim(),gateway);manager.selectedPetId=assetId.text.Trim();await manager.RefreshAsync();
                 if(status)status.text="서버 연결 완료";
             }

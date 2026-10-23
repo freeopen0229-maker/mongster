@@ -100,7 +100,7 @@ namespace FusionTamagotchi.EditorTools
             Label("Title",parent,"알 상점 · 서버 연동 테스트",0,850,940,80,40);
             manager.txtJeon=Label("Jeon",parent,"— 전",-340,760,330,70,27);
             manager.txtGem=Label("Gem",parent,"— 보석",0,760,330,70,27);manager.txtThread=Label("Thread",parent,"— 실타래",340,760,330,70,27);
-            controls.endpoint=Input("Endpoint",parent,"https://localhost:8443",650);
+            // Endpoint comes from NetworkConfig; never from an on-screen URL field.
             controls.account=Input("Account",parent,"local-a",550);
             controls.accessToken=Input("Token",parent,"",450,true);controls.assetId=Input("Asset",parent,"local-neulgui",350);
             var connect=Button("Connect",parent,"서버 연결",-240,240);UnityEventTools.AddPersistentListener(connect.onClick,controls.Connect);

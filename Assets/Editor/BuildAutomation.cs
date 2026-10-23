@@ -19,6 +19,7 @@ namespace FusionTamagotchi.EditorTools
         [MenuItem("Mongle/Build/Configure Development Project")]
         public static void Configure()
         {
+            if(!File.Exists("Assets/Scenes/MainGame.unity"))throw new BuildFailedException("MainGame.unity is missing.");
             Directory.CreateDirectory(Generated);AssetDatabase.Refresh();
             const string rendererPath=Generated+"/PetRenderer2D.asset",pipelinePath=Generated+"/PetURP.asset";
             var renderer=AssetDatabase.LoadAssetAtPath<Renderer2DData>(rendererPath);
@@ -30,6 +31,10 @@ namespace FusionTamagotchi.EditorTools
             }
             var pipeline=AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>(pipelinePath);
             if(!pipeline){pipeline=UniversalRenderPipelineAsset.Create(renderer);AssetDatabase.CreateAsset(pipeline,pipelinePath);}
+            const string spriteMaterialPath="Assets/Resources/MainGame/PetSprite.mat";
+            var spriteShader=Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default");
+            if(!spriteShader)throw new BuildFailedException("URP 2D sprite shader missing.");
+            if(!AssetDatabase.LoadAssetAtPath<Material>(spriteMaterialPath))AssetDatabase.CreateAsset(new Material(spriteShader),spriteMaterialPath);
             GraphicsSettings.defaultRenderPipeline=pipeline;
             int selected=QualitySettings.GetQualityLevel();
             for(int i=0;i<QualitySettings.names.Length;i++){QualitySettings.SetQualityLevel(i,false);QualitySettings.renderPipeline=pipeline;}
@@ -40,6 +45,7 @@ namespace FusionTamagotchi.EditorTools
             PlayerSettings.defaultScreenWidth=1080;PlayerSettings.defaultScreenHeight=1920;
             PlayerSettings.defaultInterfaceOrientation=UIOrientation.Portrait;
             PlayerSettings.runInBackground=false;
+            PlayerSettings.Android.forceInternetPermission=true;
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android,ScriptingImplementation.IL2CPP);
             PlayerSettings.Android.targetArchitectures=AndroidArchitecture.ARM64;
             PlayerSettings.Android.useCustomKeystore=false; // Development/debug 서명. 스토어용 비밀키는 다루지 않는다.
@@ -50,8 +56,11 @@ namespace FusionTamagotchi.EditorTools
                 var settings=new SerializedObject(playerAssets[0]);var input=settings.FindProperty("activeInputHandler");
                 if(input!=null){input.intValue=0;settings.ApplyModifiedPropertiesWithoutUndo();}
             }
-            EconomyNetworkLabSetup.Create();
-            string scene=SceneManager.GetActiveScene().path;
+            const string scene="Assets/Scenes/MainGame.unity";
+            if(!File.Exists(scene))throw new BuildFailedException("MainGame.unity is missing; refusing to deploy a test scene.");
+            EditorSceneManager.OpenScene(scene);
+            if(!UnityEngine.Object.FindFirstObjectByType<FusionTamagotchi.Client.MainGameRoot>())
+                throw new BuildFailedException("MainGame entry point is missing.");
             if(string.IsNullOrEmpty(scene)||!File.Exists(scene))throw new BuildFailedException("Generated scene was not saved.");
             EditorBuildSettings.scenes=new[]{new EditorBuildSettingsScene(scene,true)};
             AssetDatabase.SaveAssets();EditorSceneManager.SaveOpenScenes();

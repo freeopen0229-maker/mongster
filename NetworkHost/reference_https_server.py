@@ -64,7 +64,11 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):self.route(True)
     def route(self,post):
         path=urlsplit(self.path)
-        if (not post and path.path!='/v2/client/snapshot') or (post and path.path!='/v2/client/command'):
+        pet_routes={'/v2/pets/snapshot':'pet-read','/v2/pets/care':'pet-care','/v2/pets/claim-idle':'pet-claim',
+                    '/v2/pets/exploration/start':'pet-start','/v2/pets/exploration/finish':'pet-finish'}
+        pet_action=pet_routes.get(path.path)
+        valid=(post and (path.path=='/v2/client/command' or pet_action in ('pet-care','pet-claim','pet-start','pet-finish'))) or (not post and (path.path=='/v2/client/snapshot' or pet_action=='pet-read'))
+        if not valid:
             self.respond(404,{'error':'route_not_found'});return
         auth=self.headers.get('Authorization','')
         if not auth.startswith('Bearer ') or len(auth)>2048:self.respond(401,{'error':'unauthorized'});return
@@ -75,7 +79,7 @@ class Handler(BaseHTTPRequestHandler):
                 if n<1 or n>65536 or self.headers.get_content_type()!='application/json':raise ValueError()
                 command=json.loads(self.rfile.read(n))
                 if not isinstance(command,dict):raise ValueError()
-                defaults={'requestId':None,'petId':None,'kind':0,'tenPack':False,'expectedRevision':0,'slotIndex':0}
+                defaults=({'RequestId':None,'PetId':None,'ExpectedRevision':0,'Action':0} if pet_action else {'requestId':None,'petId':None,'kind':0,'tenPack':False,'expectedRevision':0,'slotIndex':0})
                 if set(command)-set(defaults):raise ValueError()
                 defaults.update(command);command=defaults
             except (ValueError,UnicodeError):self.respond(400,{'error':'invalid_json'});return
@@ -87,8 +91,8 @@ class Handler(BaseHTTPRequestHandler):
                 (hashlib.sha256(auth[7:].encode()).hexdigest(),int(time.time()))).fetchone()
             if not session:c.rollback();self.respond(401,{'error':'unauthorized'});return
             row=c.execute('SELECT world_json FROM LocalWorld WHERE singleton=1').fetchone()
-            request={'action':'command' if post else 'read','accountId':session[0],'world':json.loads(row[0]),
-                'selectedId':parse_qs(path.query).get('petId',[None])[0],'command':command}
+            request={'action':pet_action or ('command' if post else 'read'),'accountId':session[0],'world':json.loads(row[0]),
+                'selectedId':parse_qs(path.query).get('petId',[None])[0],'command':None if pet_action else command,'petCommand':command if pet_action else None}
             result=self.server.worker.invoke(request)
             if result['status']!=200:
                 c.rollback();self.respond(result['status'],{'error':'request_rejected' if result['status']==409 else 'domain_failure'});return

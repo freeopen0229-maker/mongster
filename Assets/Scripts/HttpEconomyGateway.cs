@@ -10,7 +10,7 @@ using UnityEngine.Networking;
 namespace FusionTamagotchi.Client
 {
     /// <summary>HTTPS 전송 어댑터. 아래 API 호스트는 아직 프로젝트에 배포돼 있지 않다.</summary>
-    public sealed class HttpEconomyGateway:EconomyGatewayBehaviour
+    public sealed class HttpEconomyGateway:EconomyGatewayBehaviour, Mongle.Slice.IPetGateway
     {
         [SerializeField] string baseUrl="";
         [SerializeField] int timeoutSeconds=20;
@@ -20,6 +20,7 @@ namespace FusionTamagotchi.Client
         readonly List<Pending> active=new List<Pending>();
         public void ConfigureSession(string httpsBaseUrl,string accessToken)
         {
+            NetworkConfig.ValidateEndpoint(httpsBaseUrl);
             Uri uri;
             if(!Uri.TryCreate(httpsBaseUrl,UriKind.Absolute,out uri)||uri.Scheme!="https"||
                 !string.IsNullOrEmpty(uri.UserInfo)||!string.IsNullOrEmpty(uri.Query)||!string.IsNullOrEmpty(uri.Fragment)||string.IsNullOrWhiteSpace(accessToken))
@@ -34,6 +35,17 @@ namespace FusionTamagotchi.Client
         }
         public override async Task<ClientCommandReplyDTO> ExecuteAsync(ClientCommandDTO c,CancellationToken token)
         {string json=await Send("/v2/client/command",JsonUtility.ToJson(c),token);return JsonUtility.FromJson<ClientCommandReplyDTO>(json);}
+        public async Task<Mongle.Slice.PetSnapshot> GetAsync(string petId,CancellationToken token)
+        {return JsonUtility.FromJson<Mongle.Slice.PetSnapshot>(await Send("/v2/pets/snapshot?petId="+Uri.EscapeDataString(petId),null,token));}
+        async Task<Mongle.Slice.PetSnapshot> PetCommand(string route,Mongle.Slice.PetActionRequest request,CancellationToken token)
+        {
+            try{return JsonUtility.FromJson<Mongle.Slice.PetSnapshot>(await Send(route,JsonUtility.ToJson(request),token));}
+            catch(EconomyRequestRejectedException e){throw new Mongle.Slice.PetCommandRejectedException(e.Message);}
+        }
+        public Task<Mongle.Slice.PetSnapshot> CareAsync(Mongle.Slice.PetActionRequest r,CancellationToken t)=>PetCommand("/v2/pets/care",r,t);
+        public Task<Mongle.Slice.PetSnapshot> ClaimIdleAsync(Mongle.Slice.PetActionRequest r,CancellationToken t)=>PetCommand("/v2/pets/claim-idle",r,t);
+        public Task<Mongle.Slice.PetSnapshot> StartExplorationAsync(Mongle.Slice.PetActionRequest r,CancellationToken t)=>PetCommand("/v2/pets/exploration/start",r,t);
+        public Task<Mongle.Slice.PetSnapshot> FinishExplorationAsync(Mongle.Slice.PetActionRequest r,CancellationToken t)=>PetCommand("/v2/pets/exploration/finish",r,t);
         Task<string> Send(string path,string body,CancellationToken token)
         {
             if(!isActiveAndEnabled||string.IsNullOrEmpty(bearerToken)||string.IsNullOrEmpty(baseUrl))
@@ -71,6 +83,7 @@ namespace FusionTamagotchi.Client
             foreach(var p in new List<Pending>(active)){p.request?.Abort();p.completion.TrySetCanceled();Cleanup(p);}
             StopAllCoroutines();
         }
-        void OnDisable(){CancelAll();bearerToken=null;}
+        public void ClearSession(){CancelAll();bearerToken=null;baseUrl="";}
+        void OnDisable(){ClearSession();}
     }
 }

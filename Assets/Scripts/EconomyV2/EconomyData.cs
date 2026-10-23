@@ -76,12 +76,13 @@ namespace FusionTamagotchi
         public long Revision;
         public AssetKind Kind;
         public bool IsListed, Locked;
+        public PetState Lifecycle;
         public PetData Pet;
         public EggData Egg;
         public string MaterialId;
         public int Quantity=1;
         public EconomyAsset Clone()
-        { var a=(EconomyAsset)MemberwiseClone();a.Pet=Pet?.Clone();a.Egg=Egg?.Clone();return a; }
+        { var a=(EconomyAsset)MemberwiseClone();a.Pet=Pet?.Clone();a.Lifecycle=Lifecycle?.Clone();a.Egg=Egg?.Clone();return a; }
     }
     [Serializable]
     public sealed class EconomyListing

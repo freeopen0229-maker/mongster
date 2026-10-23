@@ -45,6 +45,7 @@ namespace Mongle.Slice
             p.PendingIdleCoins=Math.Max(0,p.PendingIdleCoins-r.Coins);p.PendingIdleXp=Math.Max(0,p.PendingIdleXp-r.Experience);
             p.UnclaimedIdleSeconds=0;GainXp(p,r.Experience);return r;
         }
+        public static void AwardExploration(PetState p){GainXp(p,8);p.Fatigue=Clamp(p.Fatigue+6,0,100);p.Hunger=Clamp(p.Hunger-3,0,100);}
         static void GainXp(PetState p,int amount)
         { p.Experience=checked(p.Experience+amount);while(p.Level<100&&p.Experience>=p.Level*30){p.Experience-=p.Level*30;p.Level++;} }
         public static PetCombatStats Stats(PetState p)

@@ -16,7 +16,7 @@ public static class DomainWorker
     public sealed class Input
     {
         public string action,accountId,selectedId;
-        public ClientCommandDTO command;
+        public ClientCommandDTO command;public PetActionRequest petCommand;
         public InMemoryWorldStore.WorldSave world;
     }
     public sealed class Output
@@ -66,6 +66,20 @@ public static class DomainWorker
             var service=new EconomyService(store,new SystemServerClock(),random,policy);
             var facade=new ClientEconomyFacade(input.accountId,store,service,policy);
             string body;
+            if(input.action.StartsWith("pet-",StringComparison.Ordinal))
+            {
+                var pets=new ServerPetService(store,new SystemServerClock());PetSnapshot snapshot;
+                switch(input.action)
+                {
+                    case "pet-read":snapshot=pets.Get(input.accountId,input.selectedId);break;
+                    case "pet-care":snapshot=pets.Care(input.accountId,input.petCommand);break;
+                    case "pet-claim":snapshot=pets.ClaimIdle(input.accountId,input.petCommand);break;
+                    case "pet-start":snapshot=pets.StartExploration(input.accountId,input.petCommand);break;
+                    case "pet-finish":snapshot=pets.FinishExploration(input.accountId,input.petCommand);break;
+                    default:throw new InvalidOperationException("Unsupported pet operation.");
+                }
+                return new WireOutput{status=200,bodyJson=Json(snapshot),world=store.Inspect().Export()};
+            }
             if(input.action=="read")body=Json(facade.ReadAsync(input.selectedId,CancellationToken.None).GetAwaiter().GetResult());
             else if(input.action=="command")body=Json(facade.ExecuteAsync(input.command,CancellationToken.None).GetAwaiter().GetResult());
             else throw new InvalidOperationException("Unsupported operation.");
@@ -79,6 +93,7 @@ public static class DomainWorker
         {
             WireOutput result;
             try{result=Handle(Parse<Input>(line));}
+            catch(InvalidOperationException e){result=new WireOutput{status=409,error=e.Message};}
             catch(EconomyRequestRejectedException e){result=new WireOutput{status=409,error=e.Message};}
             catch(Exception e){Console.Error.WriteLine(e.GetType().Name+": "+e.Message);result=new WireOutput{status=500,error="Domain operation failed; transaction was not persisted."};}
             Console.WriteLine(Json(result));Console.Out.Flush();

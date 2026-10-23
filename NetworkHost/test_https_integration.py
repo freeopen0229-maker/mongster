@@ -63,6 +63,20 @@ with tempfile.TemporaryDirectory() as directory:
   status,result=request('/v2/client/command',command(4,'hatch',petId=egg,expectedRevision=2))
   check(status==200 and result['snapshot']['pet']['petId']==egg and result['snapshot']['pet']['rarity']!='Common','real hatch returns pet after ready')
   check(request('/v2/client/command',command(4,'hatch',petId=egg,expectedRevision=2))[0]==200,'hatch response replay')
+  status,pet=request('/v2/pets/snapshot?petId='+egg)
+  check(status==200 and pet['Pet']['PetId']==egg,'hatch and care share canonical pet identity')
+  care={'PetId':egg,'RequestId':'pet-care-lost','ExpectedRevision':pet['Pet']['Revision'],'Action':1}
+  affection=pet['Pet']['Affection']
+  server.delay_response_once=.35;timedout=False
+  try:request('/v2/pets/care',care,timeout=.08)
+  except (TimeoutError,OSError):timedout=True
+  check(timedout,'pet response lost after SQLite commit');time.sleep(.4)
+  status,confirmed=request('/v2/pets/care',care)
+  check(status==200 and confirmed['Pet']['Affection']==min(100,affection+2),'same pet RequestId applies care once')
+  check(request('/v2/pets/care',care)[1]==confirmed,'pet receipt replay returns identical snapshot')
+  check(request('/v2/pets/snapshot?petId='+egg,account='local-b')[0]==409,'pet snapshot enforces token ownership')
+  forged=dict(care,RequestId='pet-forged',AccountCoins=999999)
+  check(request('/v2/pets/care',forged)[0]==400,'client cannot supply authoritative reward fields')
   server.delay_response_once=.35;lost=command(0,'lost-after-commit',tenPack=False)
   timedout=False
   try:request('/v2/client/command',lost,timeout=.08)

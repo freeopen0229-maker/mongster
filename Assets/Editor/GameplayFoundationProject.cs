@@ -21,10 +21,10 @@ public static class GameplayFoundationProject
         Directory.CreateDirectory("Assets/Gameplay/Clips");Directory.CreateDirectory("Assets/Scenes");
         EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
         var camera=new GameObject("Main Camera").AddComponent<Camera>();camera.tag="MainCamera";camera.transform.position=new Vector3(0,6,-7);camera.transform.LookAt(new Vector3(0,.7f,.3f));camera.allowHDR=true;camera.gameObject.AddComponent<AudioListener>();
-        var cameraFx=camera.gameObject.AddComponent<VfxPresentation>();
+        VfxPresentation cameraFx=null; // Built-in OnRenderImage bloom is incompatible with the URP 2D renderer.
         var light=new GameObject("Sun").AddComponent<Light>();light.type=LightType.Directional;light.intensity=1.2f;light.transform.rotation=Quaternion.Euler(50,-25,0);
         var floor=GameObject.CreatePrimitive(PrimitiveType.Plane);floor.name="Ground";floor.GetComponent<Renderer>().sharedMaterial=Surface("Ground",new Color(.18f,.24f,.22f));
-        var services=new GameObject("Pet Data");var data=services.AddComponent<PetRuntimeManager>();
+        var services=new GameObject("Pet Data");services.SetActive(false);var online=services.AddComponent<Mongle.Slice.Client.PetRuntimeManager>();var data=services.AddComponent<PetRuntimeManager>();data.server=online;
         var feedback=new GameObject("Combat Feedback").AddComponent<CombatFeedback>();feedback.cameraFx=cameraFx;
         var player=new GameObject("Player");player.transform.position=new Vector3(0,.05f,-1.8f);
         var rb=player.AddComponent<Rigidbody>();rb.mass=1;rb.interpolation=RigidbodyInterpolation.Interpolate;rb.constraints=RigidbodyConstraints.FreezeRotation;
@@ -45,6 +45,7 @@ public static class GameplayFoundationProject
         {
             var enemy=GameObject.CreatePrimitive(PrimitiveType.Capsule);enemy.name="Training Target "+i;enemy.layer=8;enemy.transform.position=new Vector3((i-1)*1.8f,.65f,1.8f);enemy.transform.localScale=new Vector3(.5f,.65f,.5f);enemy.GetComponent<Renderer>().sharedMaterial=Surface("Target",new Color(.35f,.4f,.5f));enemy.AddComponent<VfxTarget>();
         }
+        services.SetActive(true);
         EditorSceneManager.SaveScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene(),Scene);AssetDatabase.SaveAssets();
         EditorBuildSettings.scenes=new[]{new EditorBuildSettingsScene(Scene,true)};
         Debug.Log("Gameplay foundation scene configured. Open Play Mode to verify joystick, action markers and care/rewards.");
@@ -52,12 +53,12 @@ public static class GameplayFoundationProject
     static Material Surface(string name,Color color)
     {
         string path="Assets/Gameplay/"+name+".mat";var m=AssetDatabase.LoadAssetAtPath<Material>(path);
-        if(!m){m=new Material(Shader.Find("Standard"));AssetDatabase.CreateAsset(m,path);}m.color=color;m.EnableKeyword("_EMISSION");EditorUtility.SetDirty(m);return m;
+        if(!m){m=new Material(Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default"));AssetDatabase.CreateAsset(m,path);}m.shader=Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default");m.color=color;EditorUtility.SetDirty(m);return m;
     }
     static Material TrailMaterial()
     {
         string path="Assets/Gameplay/Trail.mat";var m=AssetDatabase.LoadAssetAtPath<Material>(path);
-        if(!m){m=new Material(Resources.Load<Shader>("VFX/Energy"));AssetDatabase.CreateAsset(m,path);}m.mainTexture=Resources.Load<Texture2D>("VFX/trace_01");return m;
+        if(!m){m=new Material(Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default"));AssetDatabase.CreateAsset(m,path);}m.shader=Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default");m.mainTexture=Resources.Load<Texture2D>("VFX/trace_01");EditorUtility.SetDirty(m);return m;
     }
     static PanelSettings Panel()
     {

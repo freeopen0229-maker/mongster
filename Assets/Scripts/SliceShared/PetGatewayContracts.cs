@@ -9,7 +9,8 @@ namespace Mongle.Slice
     {
         public PetState Pet;
         public long AccountCoins,ServerUtcSeconds;
-        public PetSnapshot Clone()=>new PetSnapshot{Pet=Pet.Clone(),AccountCoins=AccountCoins,ServerUtcSeconds=ServerUtcSeconds};
+        public int AccountFood;
+        public PetSnapshot Clone()=>new PetSnapshot{Pet=Pet.Clone(),AccountCoins=AccountCoins,AccountFood=AccountFood,ServerUtcSeconds=ServerUtcSeconds};
     }
     [Serializable]
     public sealed class PetActionRequest
@@ -17,6 +18,7 @@ namespace Mongle.Slice
         public string PetId,RequestId;
         public long ExpectedRevision;
         public CareAction Action;
+        public PetActionRequest Clone()=>(PetActionRequest)MemberwiseClone();
     }
     /// <summary>
     /// HTTPS 어댑터가 인증 토큰을 붙인다. 클라이언트는 소유자/개체값/보상액/시각을 보내지 않는다.
@@ -27,6 +29,8 @@ namespace Mongle.Slice
         Task<PetSnapshot> GetAsync(string petId,CancellationToken token);
         Task<PetSnapshot> CareAsync(PetActionRequest request,CancellationToken token);
         Task<PetSnapshot> ClaimIdleAsync(PetActionRequest request,CancellationToken token);
+        Task<PetSnapshot> StartExplorationAsync(PetActionRequest request,CancellationToken token);
+        Task<PetSnapshot> FinishExplorationAsync(PetActionRequest request,CancellationToken token);
     }
     public enum PaidProductKind { IncubationTimeScroll, Costume, LuminousEgg }
     public static class MonetizationPolicy
