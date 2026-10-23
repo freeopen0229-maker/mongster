@@ -43,7 +43,7 @@ namespace FusionTamagotchi.Client
             // Show hatch control only for an authenticated server-selected egg, never an invented local egg.
             economy.PetHatched+=_=>Render();
             economy.EggsPurchased+=async ids=>{if(ids.Length==0)return;economy.selectedPetId=ids[0];try{await economy.RefreshAsync();}catch(Exception e){ShowStatus(e.Message);}};
-            pet.Changed+=Render;pet.Failed+=ShowStatus;session.StatusChanged+=ShowStatus;session.PetVisibilityChanged+=visible=>{if(petView)petView.gameObject.SetActive(visible);};
+            economy.StatusChanged+=ShowStatus;pet.Changed+=Render;pet.Failed+=ShowStatus;session.StatusChanged+=ShowStatus;session.PetVisibilityChanged+=visible=>{if(petView)petView.gameObject.SetActive(visible);};
             CreatePetView();services.SetActive(true);Render();
             try{NetworkConfig.Load();ShowStatus("로그인 후 서버에서 펫을 불러옵니다.");}
             catch(Exception e){ShowStatus(e.Message);}
@@ -71,15 +71,16 @@ namespace FusionTamagotchi.Client
         void Render()
         {
             var p=pet?pet.ProjectForDisplay():null;bool ready=session&&session.LoggedIn&&p!=null;
-            foreach(var b in commands??Array.Empty<Button>())b.interactable=ready&&!pet.Busy&&!pet.HasPending&&!p.IsBusy;
+            bool available=ready&&!pet.Busy&&!pet.HasPending&&!economy.isProcessing&&!economy.HasPending;
+            foreach(var b in commands??Array.Empty<Button>())b.interactable=available&&!p.IsBusy;
             if(retry)retry.interactable=(ready&&pet.HasPending&&!pet.Busy)||(session&&session.LoggedIn&&economy.HasPending&&!economy.isProcessing);
-            if(start)start.interactable=ready&&!pet.Busy&&!pet.HasPending&&!p.IsBusy;
-            if(finish)finish.interactable=ready&&!pet.Busy&&!pet.HasPending&&p.ExplorationId!=""&&p.LastUtc>=p.ExplorationEndUtc;
-            bool shop=session&&session.LoggedIn&&!economy.isProcessing&&!economy.HasPending;
+            if(start)start.interactable=available&&!p.IsBusy;
+            if(finish)finish.interactable=available&&p.ExplorationId!=""&&p.LastUtc>=p.ExplorationEndUtc;
+            bool shop=session&&session.LoggedIn&&!economy.isProcessing&&!economy.HasPending&&!pet.Busy&&!pet.HasPending;
             if(buyEgg)buyEgg.interactable=shop;
             if(incubate)incubate.interactable=shop&&economy.SelectedEgg!=null&&!economy.SelectedEgg.incubating;
             if(hatch)hatch.interactable=shop&&economy.SelectedEgg!=null&&economy.SelectedEgg.incubating;
-            if(p==null){if(stats&&session&&session.LoggedIn)stats.text="전 "+economy.wallet.jeon+" · 보석 "+economy.wallet.gem;return;}
+            if(p==null){if(stats)stats.text=session&&session.LoggedIn?"전 "+economy.wallet.jeon+" · 보석 "+economy.wallet.gem:"로그인 후 펫 상태를 불러옵니다";if(petInfo)petInfo.text="나의 펫";return;}
             stats.text=$"Lv.{p.Level}   포만감 {p.Hunger:F0}   친밀도 {p.Affection:F0}\n피로 {p.Fatigue:F0}   전 {pet.AccountCoins}   먹이 {pet.AccountFood}";
             petInfo.text=p.ExplorationId!=""?$"탐험 중 · 남은 시간 {Math.Max(0,p.ExplorationEndUtc-p.LastUtc)}초":$"{p.PetId} · {p.Stage} · {p.Grade}";
         }

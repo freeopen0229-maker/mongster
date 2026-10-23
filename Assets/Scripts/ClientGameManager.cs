@@ -34,6 +34,7 @@ namespace FusionTamagotchi.Client
         public bool HasPending=>session!=null&&session.HasPending;
         public bool isProcessing=>session!=null&&session.IsBusy;
         public event Action<string[]> EggsPurchased;
+        public event Action<string> StatusChanged;
         public event Action<PetDTO> PetUpdated,PetHatched;
         public event Action<EggDTO> EggUpdated;
         ClientEconomySession session;
@@ -170,7 +171,7 @@ namespace FusionTamagotchi.Client
             foreach(var b in actionButtons)if(b)b.interactable=can;
             if(retryButton)retryButton.interactable=session!=null&&!session.IsBusy&&session.HasPending;
         }
-        void SetStatus(string text){if(txtStatus)txtStatus.text=text;Debug.Log("[Economy UI] "+text);}
+        void SetStatus(string text){if(txtStatus)txtStatus.text=text;StatusChanged?.Invoke(text);Debug.Log("[Economy UI] "+text);}
         // 서버 방송 수신 계층만 호출한다. eventId로 재연결 중복 표시를 방지한다.
         public void ReceiveHiddenNotice(HiddenAwakeningNoticeDTO notice)
         {

@@ -19,7 +19,7 @@ namespace Mongle.Slice.Client
         public bool HasPending=>session?.Pending!=null;
         public async Task InitializeAsync(IPetGateway transport,string id,string account)
         {
-            generation++;lifetime?.Cancel();lifetime?.Dispose();lifetime=new CancellationTokenSource();
+            int epoch=++generation;lifetime?.Cancel();lifetime?.Dispose();lifetime=new CancellationTokenSource();
             if(session!=null)session.PendingChanged-=SavePending;
             session=new ClientPetSession(account,id,transport);pendingKey="FusionTamagotchi.PetPending."+account+"."+id;storageValid=true;
             session.PendingChanged+=SavePending;
@@ -27,7 +27,7 @@ namespace Mongle.Slice.Client
             if(saved!="")try{session.Restore(JsonUtility.FromJson<PendingPetCommand>(saved));}
             catch(Exception){storageValid=false;Failed?.Invoke("저장된 미확정 요청을 확인해야 합니다. 신규 요청을 차단했습니다.");}
             Changed?.Invoke();await RefreshAsync();
-            if(storageValid&&HasPending)await RetryPendingAsync();
+            if(epoch==generation&&storageValid&&HasPending)await RetryPendingAsync();
         }
         void SavePending()
         {

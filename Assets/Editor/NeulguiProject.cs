@@ -16,7 +16,7 @@ public static class NeulguiProject
     {
         EditorApplication.delayCall += () =>
         {
-            if (!Application.isBatchMode && !File.Exists(ScenePath)) Create();
+            if (!Application.isBatchMode && !File.Exists("Assets/Scenes/MainGame.unity") && !File.Exists(ScenePath)) Create();
         };
     }
     static Transform Node(string name, Transform parent, Vector3 position)

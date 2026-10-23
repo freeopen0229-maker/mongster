@@ -1,3 +1,5 @@
+> **현재 메인 게임 전환:** [MAIN_GAME_SERVER_LOOP.md](Docs/MAIN_GAME_SERVER_LOOP.md). 빌드 시작 씬은 커밋된 `Assets/Scenes/MainGame.unity`로 고정됩니다. 서버 권한 돌봄·탐험과 동일 RequestId 재확인을 연결했습니다. 외부 API 주소와 실제 로그인 제공자는 아직 등록되지 않아 온라인 플레이 연결은 미완료입니다. 아래 실행 보고서는 각 이전 버전의 기록입니다.
+
 > **Current cloud/server delivery:** [GAMECI_AND_SERVER_FINAL_REPORT.md](Docs/GAMECI_AND_SERVER_FINAL_REPORT.md). Local Unity Editor attempts stopped. GitHub-hosted GameCI Android workflow and SQLite SQL package prepared. Current Player/Editor offline Roslyn API compilation and core scenarios passed. Remote activation/build, APK, Play Mode and production migration remain NOT RUN. Older reports below are historical.
 
 > **Latest IPC recovery attempt:** [UNITY_IPC_RECOVERY_REPORT.md](Docs/UNITY_IPC_RECOVERY_REPORT.md). Writable XDG paths fixed the preferences-folder error. Actual import still exited 1 at licensing/UPM IPC; fresh AF_UNIX socket creation is denied. Native preflight added; no APK or Play Mode success.
