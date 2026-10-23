@@ -1,0 +1,19 @@
+{
+  "status": "SOURCE_CONFIGURATION_CHECKED_REMOTE_EXECUTION_NOT_RUN",
+  "localEditorExecution": "STOPPED per user directive",
+  "gameciRef": {
+    "repository": "game-ci/unity-builder",
+    "tag": "v4",
+    "sha": "4423ee75828dff56037d1d1cfdac6b68e3a6ba00",
+    "verifiedVia": "GitHub API git/ref/tags/v4"
+  },
+  "container": {
+    "image": "unityci/editor:ubuntu-6000.3.26f1-android-3",
+    "registryTagState": "active",
+    "verifiedVia": "Docker Hub v2 tag API",
+    "pulledOrExecuted": false
+  },
+  "secretsConfiguredRemotely": false,
+  "remoteRepositoryProvided": false,
+  "apkBuilt": false
+}

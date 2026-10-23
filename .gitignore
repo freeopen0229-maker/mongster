@@ -1,0 +1,17 @@
+/Library/
+/Temp/
+/Logs/
+/obj/
+/Builds/
+/UserSettings/
+/MemoryCaptures/
+*.ulf
+*.alf
+*.keystore
+*.jks
+*.pem
+*.key
+.env
+.env.*
+private-tokens.json
+__pycache__/

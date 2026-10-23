@@ -1,0 +1,9 @@
+{
+  "officialUrl": "https://download.unity3d.com/download_unity/de8167e7440c/LinuxEditorInstaller/Unity-6000.3.26f1.tar.xz",
+  "version": "6000.3.26f1",
+  "archiveBytes": 4540380840,
+  "archiveSha256": "2c2d84526c5ba3b34b2bbeb5f5a8758a113129b9abf596d2068f999c353ca547",
+  "editorPath": "/workspace/scratch/73110fac84d1/unity-install/Editor/Unity",
+  "installed": true,
+  "licenseActivated": false
+}

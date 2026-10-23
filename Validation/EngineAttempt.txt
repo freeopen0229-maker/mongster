@@ -1,0 +1,9 @@
+Official editor invocation exited with code 1 before scene validation.
+Unity Editor version:    6000.3.26f1 (de8167e7440c)
+Batch mode:              YES
+Architecture:            x86_64
+[Licensing::IpcConnector] Error: Failed to connect to LicenseClient-root channel (error code: 0x80000000) .
+[Licensing::IpcConnector] Error: Failed to connect to LicenseClient-root channel (error code: 0x80000000) .
+[Licensing::Module] Error: Licensing initialization failed after 0.00s
+[Package Manager] Could not connect to IPC stream "Upm-5" after 30.0 seconds.
+[Package Manager] Failed to start the Unity Package Manager local server process. Make sure the process [/workspace/scratch/73110fac84d1/unity-runtime/Editor/Data/Resources/PackageManager/Server/UnityPackageManager] is not blocked by your anti-virus configuration.

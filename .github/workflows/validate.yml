@@ -1,0 +1,69 @@
+name: Neulgui validation
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      build_android:
+        description: Build Development APK on the registered licensed Unity runner
+        required: false
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  managed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Install managed test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mono-runtime mono-mcs libmono-system-runtime-serialization4.0-cil python3-cryptography
+      - name: Run domain, client, presentation and migration tests
+        run: |
+          /usr/bin/python3 Tools/verify_economy_v2.py /usr/bin/mono /usr/lib/mono/4.5/mcs.exe
+          /usr/bin/python3 Tools/sync_editor_mock_sources.py --check
+          /usr/bin/python3 Tools/verify_viewport_local.py /usr/bin/mono /usr/lib/mono/4.5/mcs.exe
+          /usr/bin/python3 Tools/test_db_migration.py
+          /usr/bin/python3 Tools/test_pet_rarity_migration.py
+          /usr/bin/python3 Tools/test_sql_package.py
+          /usr/bin/python3 NetworkHost/test_https_integration.py /usr/bin/mono /usr/lib/mono/4.5/mcs.exe
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        if: always()
+        with:
+          name: managed-validation
+          path: Validation/
+  unity:
+    if: github.event_name == 'workflow_dispatch' && vars.UNITY_NATIVE_RUNNER_ENABLED == 'true'
+    needs: managed
+    runs-on: [self-hosted, linux, x64, unity-6000.3.26f1]
+    timeout-minutes: 60
+    env:
+      UNITY_EDITOR_PATH: ${{ vars.UNITY_EDITOR_PATH }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Check native IPC and writable project prerequisites
+        run: python3 Tools/unity_preflight.py --editor "$UNITY_EDITOR_PATH"
+      - name: Restore packages and compile
+        run: python3 Tools/run_unity_validation.py --editor "$UNITY_EDITOR_PATH" --mode import
+      - name: Configure URP and Development scene
+        run: python3 Tools/run_unity_validation.py --editor "$UNITY_EDITOR_PATH" --mode configure
+      - name: Run native Play Mode UI tests and capture frames
+        run: python3 Tools/run_unity_validation.py --editor "$UNITY_EDITOR_PATH" --mode playmode --timeout 1200
+      - name: Build Development APK
+        if: inputs.build_android
+        run: python3 Tools/run_unity_validation.py --editor "$UNITY_EDITOR_PATH" --mode android --timeout 2400
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        if: always()
+        with:
+          name: native-unity-results
+          path: |
+            Validation/NativeUnity/
+            Validation/PlayMode/
+            Builds/Android/*.apk

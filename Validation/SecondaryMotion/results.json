@@ -1,0 +1,11 @@
+{
+  "scope": "Pure C# math/timing only; Unity C# API compilation and visual verification NOT RUN",
+  "result": "PASS",
+  "double_bursts": 1185,
+  "bursts": 8080,
+  "sha256": {
+    "Assets/Scripts/VisualRenewal/PetSecondaryMotion.cs": "40fbba0180572add652367096e840d3480e2eea1c5de5f0cf2615d8b262584a1",
+    "Assets/Scripts/VisualRenewal/PetBlinkClock.cs": "c46cd5efe0059638309cc6f094ffa152e5fa4fbd2667f4546a203112aa2fecfe",
+    "Assets/Scripts/VisualRenewal/PetSpringMath.cs": "6371c68f8aeda4d9921876ac67ae98f880df9b4f50a516ab00ebc4d09ea3cd8e"
+  }
+}

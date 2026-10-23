@@ -1,0 +1,10 @@
+{
+  "ClientEconomyFacade.cs": "e5bfbc3b53e9c3478a73a6122b369069828b76f9d704db8360a186469db27917",
+  "EconomyContracts.cs": "c96951cd0eee9c8a31728e81774a645664bb7238dc5fb024b6272e43a58ce431",
+  "EconomyService.cs": "326c38af497d0c7bd18aa1d6aadde81086d43dd3a969c3defe55a18c95b36dd1",
+  "PetTradeService.cs": "6c7ae63765bf33c298996f21347962376d08f15aea5239f8ac0ff3b04f98b9a3",
+  "ServerPetService.cs": "50f3d166d5b803377f7890f4791bc7743742dae9061b185dcb1a18ff27c0471d",
+  "WorldContracts.cs": "5a6f6b5c37773f73fbe307a6b402a50f7b412869e7080c29bdf6928118187051",
+  "Testing/InMemoryWorldStore.cs": "8e8d93db226deb5fda990d467c85083e2884597af470b3b2a15e4848499c7e9c",
+  "Testing/PetTradeMockScenario.cs": "f4078384ffcc2baec9653319716f899df469833204d753f6a6738d4f8a593f0f"
+}

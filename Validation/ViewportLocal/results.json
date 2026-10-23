@@ -1,0 +1,61 @@
+{
+  "scope": "Pure C# local trade and hatch policy. NOT Unity API compilation, Editor console execution, rendering, Play Mode or mobile tests.",
+  "records": [
+    {
+      "name": "CompileLocalMock",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "RunLocalMock",
+      "exit_code": 0,
+      "output": "[MOCK LIST] A listed mock-neulgui; remaining=2; price=100.\n[PASS MOCK BUY] owner=B; CurrentTradeCount=2->1; IsSoulbound=False; feeBurned=5.\n[MOCK LIST] A listed mock-neulgui; remaining=1; price=100.\n[PASS MOCK BUY] owner=B; CurrentTradeCount=1->0; IsSoulbound=True; feeBurned=5.\n[PASS MOCK] Soulbound relisting rejected; same request replay did not charge again.\n[PASS MOCK] Both remaining-count and final-soulbind cases passed. No real accounts were touched.\n[PASS LOCAL SCROLL] 8h -> 0s; one scroll; repeat/ready-egg consumption blocked. Managed logic only.\n"
+    },
+    {
+      "name": "CompileEditorMirror",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "RunEditorMirror",
+      "exit_code": 0,
+      "output": "[MOCK LIST] A listed mock-neulgui; remaining=2; price=100.\n[PASS MOCK BUY] owner=B; CurrentTradeCount=2->1; IsSoulbound=False; feeBurned=5.\n[MOCK LIST] A listed mock-neulgui; remaining=1; price=100.\n[PASS MOCK BUY] owner=B; CurrentTradeCount=1->0; IsSoulbound=True; feeBurned=5.\n[PASS MOCK] Soulbound relisting rejected; same request replay did not charge again.\n[PASS MOCK] Both remaining-count and final-soulbind cases passed. No real accounts were touched.\n[PASS LOCAL SCROLL] 8h -> 0s; one scroll; repeat/ready-egg consumption blocked. Managed logic only.\n"
+    },
+    {
+      "name": "CompileNonEditorGuard",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "CompileBoundaryProbe",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "RunNonEditorGuard",
+      "exit_code": 0,
+      "output": "[PASS BOUNDARY] Generated server types absent without UNITY_EDITOR. This is not an APK build.\n"
+    }
+  ],
+  "source_sha256": {
+    "Assets/Scripts/SliceShared/PetGatewayContracts.cs": "6f536840c55ff0a2824044ca87dd7348add507c55d28bd07bf8a3399561dddf5",
+    "Assets/Scripts/SliceShared/PetRules.cs": "412ed4a558bcd042256a99174e235c9a002c7f47e3db58556b35d0a910b7cf87",
+    "Assets/Scripts/SliceShared/PetState.cs": "74ea54153e39f81731e9ee8493ab968b3cee1b2ad270f91f662fad11e204ce35",
+    "Assets/Scripts/SliceShared/PetTradeData.cs": "a7d95763420960398d88695b2078aefdf17798b20e25a66d28fab4e139276a08",
+    "Assets/Scripts/EconomyV2/ClientContracts.cs": "34a6195d5f7f512f7bd343284b21cef1753e4431ec6eefc0b0dc21e41c7e8306",
+    "Assets/Scripts/EconomyV2/ClientEconomySession.cs": "11a301831d163d8caf32cd151703589e2bdea2d88ff8d61b4a56ed8821a64025",
+    "Assets/Scripts/EconomyV2/EconomyData.cs": "ed9edb6e9f2cb717a4d057696fb22e0f17875f4557c828c9c49da161410d4e33",
+    "Assets/Scripts/EconomyV2/HatchPresentationPolicy.cs": "6fe066900561a8aa1aae5d979713929d09a70fb38c46df5359c2ee81429b17bf",
+    "Assets/Scripts/EconomyV2/SerialTooltipState.cs": "d937f3f3be685b01f9d4172f355c05620904fe632185c5f6f85b0e757ae9fd40",
+    "ServerSources/ClientEconomyFacade.cs": "e5bfbc3b53e9c3478a73a6122b369069828b76f9d704db8360a186469db27917",
+    "ServerSources/EconomyContracts.cs": "c96951cd0eee9c8a31728e81774a645664bb7238dc5fb024b6272e43a58ce431",
+    "ServerSources/EconomyService.cs": "326c38af497d0c7bd18aa1d6aadde81086d43dd3a969c3defe55a18c95b36dd1",
+    "ServerSources/PetTradeService.cs": "6c7ae63765bf33c298996f21347962376d08f15aea5239f8ac0ff3b04f98b9a3",
+    "ServerSources/ServerPetService.cs": "50f3d166d5b803377f7890f4791bc7743742dae9061b185dcb1a18ff27c0471d",
+    "ServerSources/Testing/InMemoryWorldStore.cs": "8e8d93db226deb5fda990d467c85083e2884597af470b3b2a15e4848499c7e9c",
+    "ServerSources/Testing/PetTradeMockScenario.cs": "f4078384ffcc2baec9653319716f899df469833204d753f6a6738d4f8a593f0f",
+    "ServerSources/WorldContracts.cs": "5a6f6b5c37773f73fbe307a6b402a50f7b412869e7080c29bdf6928118187051",
+    "Assets/Scripts/Testing/LocalHatchSimulation.cs": "8bc6ccd78caf9905a4639d74be2ecbf1fc5eca108cca89bb05231a34d9376755",
+    "Tools/ViewportLocalProbe.cs": "32f88219aeac4af664718bc18ec2da312b0bf3693eb2990ad4b7e61a049c9bfd"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "checks": 11,
+  "scope": "Created SQLite fixtures only; no production DB supplied or changed",
+  "appliedMapping": {
+    "0": "Common",
+    "1": "Rare",
+    "2": "Rare",
+    "3": "Epic",
+    "4": "Legendary",
+    "5": "Divine"
+  }
+}

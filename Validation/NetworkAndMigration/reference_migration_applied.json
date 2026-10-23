@@ -1,0 +1,24 @@
+{
+  "rowCount": 7,
+  "convertCount": 6,
+  "pendingCount": 1,
+  "mapping": {
+    "0": "Common",
+    "1": "Rare",
+    "2": "Rare",
+    "3": "Epic",
+    "4": "Legendary",
+    "5": "Divine"
+  },
+  "scope": "Explicitly generated reference SQLite fixture; NOT production/user data",
+  "applied": true,
+  "backup": "PetTable_Backup_2026",
+  "pendingTable": "PetTable_MigrationPending_2026",
+  "resultCounts": {
+    "Common": 1,
+    "Epic": 1,
+    "Rare": 2,
+    "Divine": 1,
+    "Legendary": 1
+  }
+}

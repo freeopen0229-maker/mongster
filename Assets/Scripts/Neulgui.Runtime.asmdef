@@ -1,0 +1,5 @@
+{
+  "name": "Neulgui.Runtime",
+  "references": ["UnityEngine.UI"],
+  "autoReferenced": true
+}

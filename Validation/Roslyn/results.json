@@ -1,0 +1,133 @@
+{
+  "scope": "Roslyn offline compilation and managed core execution. Player source uses real installed engine + template UGUI API DLLs. NOT Unity import/UPM/asmdef/shader/build/Play Mode validation.",
+  "compiler": "/workspace/scratch/73110fac84d1/unity-install/Editor/Data/MonoBleedingEdge/lib/mono/4.5/csc.exe",
+  "records": [
+    {
+      "name": "EconomyV2ProbeCompile",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "name": "EconomyV2ProbeRun",
+      "exitCode": 0,
+      "output": "PASS: 55 checks; all 10,000,000 egg outcomes exhaustively counted; real server service executed under Mono.\nPASS: shop/replay, scroll/hatch, costume/thread/archive, hidden A-E + concurrent quota, growth gate, reroll, care, market/soulbind/rollback, verified purchase and raid dedup.\nNOT TESTED: real DB/multiple processes/store receipts/network/auth/Unity UI/native rendering/mobile release.\n"
+    },
+    {
+      "name": "SliceProbeCompile",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "name": "SliceProbeRun",
+      "exitCode": 0,
+      "output": "PASS: UTC/cap/partition; IV validation; care ownership/revision/cooldown/idempotency; soulbind exhaustion; atomic rollback; two concurrent buyers; seller idle settlement; fee burn; listing cancellation; paid policy + time-only scroll effect. In-memory transaction tests, not a deployed backend.\n"
+    },
+    {
+      "name": "ClientEconomyProbeCompile",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "name": "ClientEconomyProbeRun",
+      "exitCode": 0,
+      "output": "PASS: 23 client/server integration checks: real domain facade, no optimistic spend, redaction, pending retry/restart, duplicate click, eleven eggs, reroll, rejection, wrong account/stale response.\nNOT TESTED: Unity UI compilation/rendering, HTTP host/network deployment, store receipts, production DB.\n"
+    },
+    {
+      "name": "HatchPresentationProbeCompile",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "name": "HatchPresentationProbeRun",
+      "exitCode": 0,
+      "output": "PASS: 39 presentation data checks. NOT Unity rendering, popup input, tooltip hover/touch, audio, Animator or Play Mode.\n"
+    },
+    {
+      "name": "PlayerApiSourceCompile",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "name": "EditorApiSourceCompile",
+      "exitCode": 0,
+      "output": ""
+    }
+  ],
+  "source_sha256": {
+    "Assets/Editor/BuildAutomation.cs": "de8b1b9434dd962e18755e2eecd0dc150c8a084ebb16bc42177d828fd1d7e887",
+    "Assets/Editor/EconomyNetworkLabSetup.cs": "e9a2b90dab4fadafb07797e2c472535ccb928769cf15cea1e695b1d0e0759b75",
+    "Assets/Editor/GameplayFoundationProject.cs": "f0392cfcca312b6bf888276d78e7ed3487383599ea712972d3fa55558e693a7b",
+    "Assets/Editor/LocalMockGenerated/ClientEconomyFacade.cs": "63dec55cecb13269bdcd1bb2320a660fb5555afe75306cf1ed73b6812fb35724",
+    "Assets/Editor/LocalMockGenerated/EconomyContracts.cs": "56eb3e9e8570da8f5d539627158882ef2984a865765bf78f25f0ddba2e8afbe2",
+    "Assets/Editor/LocalMockGenerated/EconomyService.cs": "9015fc2e2a2d5921d484d300bf7136adcd65fcc77ed60dbdb1a3afe5fa583f42",
+    "Assets/Editor/LocalMockGenerated/PetTradeService.cs": "974da270ceada807937d5d5fb0b3037670f14c8ec705cc2a1182cbfeda5aa3d0",
+    "Assets/Editor/LocalMockGenerated/ServerPetService.cs": "a6b07c6cbf72d8f8f5482d0afcf15b8a90d74ff45f63546b4fd0e3beccb13a1f",
+    "Assets/Editor/LocalMockGenerated/Testing/InMemoryWorldStore.cs": "eba895affdb1c004263e18d74e14b78dcd3df91a693ab4b0955bf8a9dd13384f",
+    "Assets/Editor/LocalMockGenerated/Testing/PetTradeMockScenario.cs": "16817478abc8a06e3b55f5604f68e591f627f3760d2944531d2aa0f29fc2f6a7",
+    "Assets/Editor/LocalMockGenerated/WorldContracts.cs": "3c1e3eef894d9a15eeb2ffb853bc85c47f028731cbb65a63daa4cd74f731dda9",
+    "Assets/Editor/NeulguiPlaybackValidation.cs": "015748191f816682c32f364b359ee0dce51de0f540ca1e9ae949ad89453b335f",
+    "Assets/Editor/NeulguiProject.cs": "50b01cf8e87712df142e9755bb0fe4c5687991d49146b1d8c27b012f34dcb0cc",
+    "Assets/Editor/PetTestControllerEditor.cs": "5b93735638f0e30a4fdedcba1ee5a71f56ad6e121e6157ba5f3f19ded4b5240e",
+    "Assets/Editor/PetTradeMockTests.cs": "4dac0649e6b7f84900d8d18d47aa0f8fae64a7f0e72455437f19545ccc51a0bd",
+    "Assets/Editor/PetViewportLabSetup.cs": "a33abc4160bdb5d5494087f23dc16042b92246ae91dc90b3ccf4d2be652a70b5",
+    "Assets/Editor/PetVisualRenewalValidation.cs": "ef113b35839c9e9c46158a0e0299e08b5bd3d3487a4b6c75cd728d9da25e3e89",
+    "Assets/Editor/RpgVfxPlaybackValidation.cs": "254b395d6eab9c091be25b5c28f582dd31df5a3ef419bba225291cb0c4c91aac",
+    "Assets/Editor/RpgVfxProject.cs": "8e1727b379eee4404c00186cb62a4184278b5ed2e7e5d4b5d9b61c5471ebb966",
+    "Assets/Scripts/ClientGameManager.cs": "8036eade6a514031b993d0f2f13b9c9fef8d8fff85693c83ded8322ad0eb85a8",
+    "Assets/Scripts/CombatAttackId.cs": "eaa395844afd947ec97044bca31ec2348f66cea9e939633a3eba41b50bdbe606",
+    "Assets/Scripts/CombatFeedback.cs": "5fa06ffac8ace431a061bb6952792f682dc6522552f115774f1447815b583dc5",
+    "Assets/Scripts/EconomyGatewayBehaviour.cs": "628782598d66cac3e2a66e32807b328466c19e835eb934a5f3aeccf77cfa3e37",
+    "Assets/Scripts/EconomyPlaygroundControls.cs": "2300bb0ae6ef010feac8656780bf4750a64cb9ba2d887ac17ca9e7ddc2b1632f",
+    "Assets/Scripts/EconomyV2/ClientContracts.cs": "70a921ad93619280087a948b3e384dd16d5a2a3f0adcbc682f913392fabc3310",
+    "Assets/Scripts/EconomyV2/ClientEconomySession.cs": "11a301831d163d8caf32cd151703589e2bdea2d88ff8d61b4a56ed8821a64025",
+    "Assets/Scripts/EconomyV2/EconomyData.cs": "ed9edb6e9f2cb717a4d057696fb22e0f17875f4557c828c9c49da161410d4e33",
+    "Assets/Scripts/EconomyV2/HatchPresentationPolicy.cs": "2fe16590ad0082642dd08382b283bdf69e807e5b8f253581c8ae9eed0bd476d0",
+    "Assets/Scripts/EconomyV2/SerialTooltipState.cs": "d937f3f3be685b01f9d4172f355c05620904fe632185c5f6f85b0e757ae9fd40",
+    "Assets/Scripts/EggHatchPresenter.cs": "cff5df3213036706843f0db0ae0ac0ff466bab71bed9e43dcc41bed1ed07a797",
+    "Assets/Scripts/Gameplay/MobilePetJoystick.cs": "da4bc2f4741da57590bb64639f204987cb43356b1c8298ca3c146eea5116bf0f",
+    "Assets/Scripts/Gameplay/PetAnimatorBridge.cs": "7cdb72dd361872af80ada15d6cf7d1e4fc053751b02225d89399f169dd960aa6",
+    "Assets/Scripts/Gameplay/PetAttackAnimationRelay.cs": "21dfe694ae4d2852a4e2bd7bf582b3350168c72ea8212ce80345d96f31d8265f",
+    "Assets/Scripts/Gameplay/PetAttackController.cs": "dea928009946db9711a2286158f010899af94305679a66c9ed346459c3a8513c",
+    "Assets/Scripts/Gameplay/PetGameplayHud.cs": "74dcdbb394b8344cbe70b31a8172faa7695e8b14dfda518c12580a8a7b3d35c7",
+    "Assets/Scripts/Gameplay/PetMotor.cs": "f422a54f46fda2bc3d341ccb0f342bfe2ebde5b581d1e9afa75000058acfcb24",
+    "Assets/Scripts/Gameplay/PetRuntimeManager.cs": "05f24df3cd21bab498300270b630356f0b2397282da3da81075e5473d60ba06e",
+    "Assets/Scripts/Gameplay/PetState.cs": "afdaa417dd3b0555077039a96d0a6f12bae1beb8a63d0b148e5ebe4044e050b4",
+    "Assets/Scripts/HatchResultStyling.cs": "89858b20dc120d30e22543ba0481a49b1ad628b6e1c5b57d7230cba5e3c46125",
+    "Assets/Scripts/HitStopState.cs": "834ad38c82dbdac561f89793f31d6012251e6abf003a54eb6ccecf89e9a76c12",
+    "Assets/Scripts/HttpEconomyGateway.cs": "34cd3a25c0d2a4664827cc96600fa053d8d0a6770f0b8f39f06ca6021a0666e8",
+    "Assets/Scripts/NeulguiController.cs": "6d20e8a7727cb5aa89e11be8b9a796b34bed92589cc119d56b7a3c37ce63865d",
+    "Assets/Scripts/NeulguiMath.cs": "5049dda84a31ec0110fa9df9c3cf7b9c0181fe54101d2bcc37b927e8408f1185",
+    "Assets/Scripts/NeulguiPlaybackProbe.cs": "12df081a1664e42f0780a811c780f220e5b66247067019cbee6ac25568ff65bf",
+    "Assets/Scripts/PetSerialTooltip.cs": "a1fbf1b5a2648d49f5f4262de5e6e0500cc671e93639eaf2711d5689810e8631",
+    "Assets/Scripts/RpgSkillDefinition.cs": "46b956a2a225c194c5de8e82bc8248b84afe903beceaea7296928e9fe96f245e",
+    "Assets/Scripts/RpgVfxPlaybackProbe.cs": "30156f88ba26bcbca6a7b14618dc6776d25b690254a3a35ce07b814d8c3f8c59",
+    "Assets/Scripts/SkillVfxDriver.cs": "ed49bcd35587662278a0d84eb476ecd1dea874c27de56363acdf7c8c1b576d4e",
+    "Assets/Scripts/SliceShared/PetGatewayContracts.cs": "6f536840c55ff0a2824044ca87dd7348add507c55d28bd07bf8a3399561dddf5",
+    "Assets/Scripts/SliceShared/PetRules.cs": "412ed4a558bcd042256a99174e235c9a002c7f47e3db58556b35d0a910b7cf87",
+    "Assets/Scripts/SliceShared/PetState.cs": "74ea54153e39f81731e9ee8493ab968b3cee1b2ad270f91f662fad11e204ce35",
+    "Assets/Scripts/SliceShared/PetTradeData.cs": "a7d95763420960398d88695b2078aefdf17798b20e25a66d28fab4e139276a08",
+    "Assets/Scripts/Testing/LocalHatchSimulation.cs": "8bc6ccd78caf9905a4639d74be2ecbf1fc5eca108cca89bb05231a34d9376755",
+    "Assets/Scripts/Testing/PetTestController.cs": "348c37df763e4b7892ffdd93ec0cf6e531b7c67b9ec56e04646b08563ee86c50",
+    "Assets/Scripts/VerticalSlice/PetRuntimeManager.cs": "6e0a25b25ebdbd5a319ccdd78f9cd480cefccabdd182e888e74a567c8e461c30",
+    "Assets/Scripts/VfxLibrary.cs": "ca1cfb49817f4f87a1b31e1159a7311679edf99ce98de896ad5323533a2e91d4",
+    "Assets/Scripts/VfxParticleLease.cs": "96f1ce2415e6456f297e024b88d4da8516aa0cf2fda75d5c7e79e06985d34307",
+    "Assets/Scripts/VfxPresentation.cs": "26eab4963f55cbaf5b101db84a9cd8e5b3e855c08e1b30ba3c02f95cff2ca3f3",
+    "Assets/Scripts/VfxTarget.cs": "e8ff0ddebf00c4c633b764efe2aaf3e39b4f0a22f4bf38005d9f0d85697ccb8a",
+    "Assets/Scripts/VfxVisualMotion.cs": "ef4551a644274060695e67cf88bd048f366535eb383b7c51ec5d078f90d6289e",
+    "Assets/Scripts/VisualRenewal/PetBlinkClock.cs": "c46cd5efe0059638309cc6f094ffa152e5fa4fbd2667f4546a203112aa2fecfe",
+    "Assets/Scripts/VisualRenewal/PetSecondaryMotion.cs": "40fbba0180572add652367096e840d3480e2eea1c5de5f0cf2615d8b262584a1",
+    "Assets/Scripts/VisualRenewal/PetSpringMath.cs": "6371c68f8aeda4d9921876ac67ae98f880df9b4f50a516ab00ebc4d09ea3cd8e",
+    "Assets/Scripts/VisualRenewal/PetVisualBindings.cs": "ac9662c3ff9857da00ca2d2b097624384844beb9659535dc981e1e38dff6cb20",
+    "Assets/Scripts/VisualRenewal/PetVisualCatalog.cs": "ba4277d62a5bfad41ae4cd5f24a261cdbe0df3a69cf05983ec4b4301a0c9277a",
+    "Assets/Scripts/VisualRenewal/PetVisualDefinition.cs": "a571954c56a1f657cfd29d1bb7f3d897beaaf6afdcace5472c302ae23c37867a",
+    "Assets/Scripts/VisualRenewal/PetVisualManager.cs": "7a1ad6bbe4ffe1cf9a5bd0637c7eb9214b6df4ab5a65124e388fc180b8181050",
+    "ServerSources/ClientEconomyFacade.cs": "e5bfbc3b53e9c3478a73a6122b369069828b76f9d704db8360a186469db27917",
+    "ServerSources/EconomyContracts.cs": "c96951cd0eee9c8a31728e81774a645664bb7238dc5fb024b6272e43a58ce431",
+    "ServerSources/EconomyService.cs": "326c38af497d0c7bd18aa1d6aadde81086d43dd3a969c3defe55a18c95b36dd1",
+    "ServerSources/PetTradeService.cs": "6c7ae63765bf33c298996f21347962376d08f15aea5239f8ac0ff3b04f98b9a3",
+    "ServerSources/ServerPetService.cs": "50f3d166d5b803377f7890f4791bc7743742dae9061b185dcb1a18ff27c0471d",
+    "ServerSources/Testing/InMemoryWorldStore.cs": "8e8d93db226deb5fda990d467c85083e2884597af470b3b2a15e4848499c7e9c",
+    "ServerSources/Testing/PetTradeMockScenario.cs": "f4078384ffcc2baec9653319716f899df469833204d753f6a6738d4f8a593f0f",
+    "ServerSources/WorldContracts.cs": "5a6f6b5c37773f73fbe307a6b402a50f7b412869e7080c29bdf6928118187051"
+  }
+}

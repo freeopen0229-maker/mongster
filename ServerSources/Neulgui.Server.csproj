@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../Assets/Scripts/SliceShared/**/*.cs" Link="Shared/%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="../Assets/Scripts/EconomyV2/**/*.cs" Link="EconomyShared/%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Remove="Testing/**/*.cs" />
+  </ItemGroup>
+</Project>

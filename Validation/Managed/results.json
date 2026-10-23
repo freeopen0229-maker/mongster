@@ -1,0 +1,61 @@
+{
+  "scope": "Unity API C# compilation; pure C# server compilation; managed rules/in-memory atomicity tests. NOT Play Mode, deployed server or shader compilation.",
+  "records": [
+    {
+      "name": "EditorSource",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "PlayerSource",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "MathProbe",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "ManagedMathAndHitStop",
+      "exit_code": 0,
+      "output": "PASS: 0.05s hit-stop duration, overlap extension, original slow-motion scale restore, disable cleanup and zero-duration handling.\nPASS: 40000 IK poses, both bend directions, maximum segment length error=8.9406967E-08. Easing range and monotonicity pass.\nScope: Unity managed Vector2/Mathf and production NeulguiMath.cs under the Unity-bundled Mono runtime. This is not Play Mode or rendering.\n"
+    },
+    {
+      "name": "CoreLoopProbe",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "CoreLoopRules",
+      "exit_code": 0,
+      "output": "PASS: tick partition invariance; hunger/bond/fatigue bounds; 8h reward cap; duplicate-claim and clock-rollback protection; care costs/cooldowns; live combat modifier; active-to-idle bonus; invalid save rejection.\n"
+    },
+    {
+      "name": "VisualRenewalProbe",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "VisualRenewalSpring",
+      "exit_code": 0,
+      "output": "PASS: 30/60/120 Hz spring partition; pause; long delta; 100000 variable inputs; turn wrap; invalid input. Managed math only, not Unity animation.\n"
+    },
+    {
+      "name": "SliceServer",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "SliceProbe",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "SliceAuthorityAndEconomy",
+      "exit_code": 0,
+      "output": "PASS: UTC/cap/partition; IV validation; care ownership/revision/cooldown/idempotency; soulbind exhaustion; atomic rollback; two concurrent buyers; seller idle settlement; fee burn; listing cancellation; paid time-only policy. In-memory transaction tests, not a deployed backend.\n"
+    }
+  ],
+  "historical_scope_note": "Recorded for archive revision 4. Does not cover current viewport/Inspector/menu additions."
+}

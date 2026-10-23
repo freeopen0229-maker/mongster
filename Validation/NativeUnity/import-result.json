@@ -1,0 +1,28 @@
+{
+  "utc": "2026-10-23T07:23:20.658705+00:00",
+  "mode": "import",
+  "editorPath": "/workspace/scratch/73110fac84d1/unity-install/Editor/Unity",
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAILED/BLOCKED",
+  "editorLog": "Validation/NativeUnity/import-editor.log",
+  "note": "No native Play Mode/rendering/audio/mobile assertion is made. Exit zero import only establishes that this invocation ended successfully.",
+  "failureIndicators": [
+    "[Licensing::Module] Trying to connect to existing licensing client channel...",
+    "[Licensing::IpcConnector] Error: Failed to connect to LicenseClient-root channel (error code: 0x80000000) .",
+    "[Licensing::IpcConnector] Error: Connection to channel: \"LicenseClient-root\" failed; code: \"0x80000000\"",
+    "[Licensing::IpcConnector] Error: Failed to connect to LicenseClient-root channel (error code: 0x80000000) .",
+    "Failed to create device monitor from netlink.",
+    "[Licensing::IpcConnector] Error: Failed to connect to LicenseClient-root-6000.3.26 channel (error code: 0x80000000) .",
+    "[Licensing::IpcConnector] Error: Connection to channel: \"LicenseClient-root-6000.3.26\" failed; code: \"0x80000000\"",
+    "[Licensing::IpcConnector] Error: Failed to connect to LicenseClient-root-6000.3.26 channel (error code: 0x80000000) .",
+    "[Licensing::Module] Error: Licensing initialization failed after 0.00s",
+    "    at node_modules/node-ipc/dao/client.js (/home/bokken/build/output/unity/upm/dist/temp/bundle/app.js:207:13464)",
+    "    at node_modules/node-ipc/services/IPC.js (/home/bokken/build/output/unity/upm/dist/temp/bundle/app.js:213:7927)",
+    "    at node_modules/node-ipc/node-ipc.js (/home/bokken/build/output/unity/upm/dist/temp/bundle/app.js:213:12430)",
+    "[Package Manager] Could not connect to IPC stream \"Upm-6\" after 30.0 seconds.",
+    "[Package Manager] Failed to start the Unity Package Manager local server process. Make sure the process [/workspace/scratch/73110fac84d1/unity-install/Editor/Data/Resources/PackageManager/Server/UnityPackageManager] is not blocked by your anti-virus configuration."
+  ],
+  "apkExists": false,
+  "completionEvidence": false
+}

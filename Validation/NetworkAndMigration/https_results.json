@@ -1,0 +1,26 @@
+{
+  "scope": "Actual loopback HTTPS with certificate validation, C# domain worker and SQLite durability. NOT UnityWebRequest execution, public deployment or production DB.",
+  "checks": 18,
+  "result": "PASS",
+  "assertions": [
+    "unauthenticated denied",
+    "real TLS wallet read",
+    "buy one real domain commit",
+    "same ID replay no double grant",
+    "same ID different payload denied",
+    "real reroll and wallet refresh",
+    "token ownership enforced",
+    "start eight hour incubation",
+    "purchase does not bypass incubation",
+    "server consumes hatch scroll",
+    "real hatch returns pet after ready",
+    "hatch response replay",
+    "real socket timeout after commit",
+    "lost response retry spends once",
+    "concurrent identical requests same eleven IDs",
+    "concurrent purchase single charge",
+    "host and C# worker restart retains wallet and receipt",
+    "SQLite retained all assets and command receipts"
+  ],
+  "compilerOutput": ""
+}

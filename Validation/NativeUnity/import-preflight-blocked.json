@@ -1,0 +1,18 @@
+{
+  "utc": "2026-10-23T07:24:56.687452+00:00",
+  "editorExists": true,
+  "hubPresent": false,
+  "licenseActivation": "NOT VERIFIED: use official Hub/license provisioning on runner",
+  "unixIpc": {
+    "allowed": false,
+    "errno": 1,
+    "error": "[Errno 1] Operation not permitted"
+  },
+  "hostSecurity": {
+    "NoNewPrivs": "1",
+    "Seccomp": "2",
+    "Seccomp_filters": "1"
+  },
+  "projectWritable": true,
+  "status": "BLOCKED"
+}

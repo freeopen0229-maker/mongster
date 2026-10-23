@@ -1,0 +1,65 @@
+{
+  "checkedUtc": "2026-10-23T07:18:13.707453+00:00",
+  "scope": "Current workspace/host only. Does not inspect user PC or external CI/cloud firewall.",
+  "unityProjectVersion": "m_EditorVersion: 6000.3.26f1",
+  "executablesPresent": {
+    "Unity": false,
+    "unity": false,
+    "UnityHub": false,
+    "dotnet": false,
+    "mono": false,
+    "docker": false,
+    "psql": false,
+    "mysql": false,
+    "mongod": false,
+    "adb": false
+  },
+  "knownUnityDirectoriesPresent": [],
+  "installedEditorPaths": [
+    "/workspace/scratch/73110fac84d1/unity-install/Editor/Unity"
+  ],
+  "unixIpcSocketProbe": {
+    "allowed": false,
+    "errno": 1,
+    "error": "Operation not permitted"
+  },
+  "ciRemoteRegistration": "NOT CONFIGURED: no repository/runner supplied",
+  "portableMonoPresent": true,
+  "ciFiles": [
+    ".github/workflows/validate.yml"
+  ],
+  "ciIndicatorNamesPresent": [],
+  "relevantConfigNamesPresent": [],
+  "dbFiles": [
+    "Validation/NetworkAndMigration/ReferencePetMigration.sqlite"
+  ],
+  "localSqliteReferenceHost": true,
+  "productionDbProvider": "UNCONFIGURED/UNKNOWN",
+  "productionDbNetworkTest": "NOT RUN: no target/address supplied",
+  "loopbackBindAllowed": true,
+  "externalFirewallState": "UNKNOWN; no target, cloud account or firewall configuration supplied",
+  "declaredPackageVersions": {
+    "com.unity.modules.animation": "1.0.0",
+    "com.unity.modules.imageconversion": "1.0.0",
+    "com.unity.modules.imgui": "1.0.0",
+    "com.unity.modules.inputlegacy": "1.0.0",
+    "com.unity.modules.jsonserialize": "1.0.0",
+    "com.unity.modules.particlesystem": "1.0.0",
+    "com.unity.modules.physics": "1.0.0",
+    "com.unity.modules.audio": "1.0.0",
+    "com.unity.modules.uielements": "1.0.0",
+    "com.unity.ugui": "2.0.0",
+    "com.unity.render-pipelines.universal": "17.3.0",
+    "com.unity.2d.animation": "13.0.6",
+    "com.unity.modules.ui": "1.0.0",
+    "com.unity.modules.unitywebrequest": "1.0.0",
+    "com.unity.test-framework": "1.6.0",
+    "com.unity.modules.screencapture": "1.0.0"
+  },
+  "unityPackageResolution": "ATTEMPTED/FAILED: installed Editor exited 1; licensing and Package Manager IPC failure before restore/compile",
+  "sceneFiles": [],
+  "playerSettingsPresent": false,
+  "graphicsSettingsPresent": false,
+  "buildSettingsPresent": false,
+  "buildReady": false
+}

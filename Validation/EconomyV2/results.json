@@ -1,0 +1,64 @@
+{
+  "scope": "Actual pure C# domain compilation and single-process in-memory scenarios. NOT Unity compilation/Play Mode, deployed DB/auth/HTTP or store verification.",
+  "records": [
+    {
+      "name": "EconomyV2ProbeCompile",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "EconomyV2ProbeRun",
+      "exit_code": 0,
+      "output": "PASS: 55 checks; all 10,000,000 egg outcomes exhaustively counted; real server service executed under Mono.\nPASS: shop/replay, scroll/hatch, costume/thread/archive, hidden A-E + concurrent quota, growth gate, reroll, care, market/soulbind/rollback, verified purchase and raid dedup.\nNOT TESTED: real DB/multiple processes/store receipts/network/auth/Unity UI/native rendering/mobile release.\n"
+    },
+    {
+      "name": "SliceProbeCompile",
+      "exit_code": 0,
+      "output": "Compilation succeeded - 1 warning(s)\n/workspace/scratch/73110fac84d1/NeulguiUnity/Tools/SliceProbe.cs(34,13): warning CS0219: The variable `receipt' is assigned but its value is never used\n"
+    },
+    {
+      "name": "SliceProbeRun",
+      "exit_code": 0,
+      "output": "PASS: UTC/cap/partition; IV validation; care ownership/revision/cooldown/idempotency; soulbind exhaustion; atomic rollback; two concurrent buyers; seller idle settlement; fee burn; listing cancellation; paid policy + time-only scroll effect. In-memory transaction tests, not a deployed backend.\n"
+    },
+    {
+      "name": "ClientEconomyProbeCompile",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "ClientEconomyProbeRun",
+      "exit_code": 0,
+      "output": "PASS: 23 client/server integration checks: real domain facade, no optimistic spend, redaction, pending retry/restart, duplicate click, eleven eggs, reroll, rejection, wrong account/stale response.\nNOT TESTED: Unity UI compilation/rendering, HTTP host/network deployment, store receipts, production DB.\n"
+    },
+    {
+      "name": "HatchPresentationProbeCompile",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "name": "HatchPresentationProbeRun",
+      "exit_code": 0,
+      "output": "PASS: 33 presentation data checks. NOT Unity rendering, popup input, tooltip hover/touch, audio, Animator or Play Mode.\n"
+    }
+  ],
+  "source_sha256": {
+    "Assets/Scripts/SliceShared/PetGatewayContracts.cs": "6f536840c55ff0a2824044ca87dd7348add507c55d28bd07bf8a3399561dddf5",
+    "Assets/Scripts/SliceShared/PetRules.cs": "412ed4a558bcd042256a99174e235c9a002c7f47e3db58556b35d0a910b7cf87",
+    "Assets/Scripts/SliceShared/PetState.cs": "74ea54153e39f81731e9ee8493ab968b3cee1b2ad270f91f662fad11e204ce35",
+    "Assets/Scripts/SliceShared/PetTradeData.cs": "a7d95763420960398d88695b2078aefdf17798b20e25a66d28fab4e139276a08",
+    "Assets/Scripts/EconomyV2/ClientContracts.cs": "34a6195d5f7f512f7bd343284b21cef1753e4431ec6eefc0b0dc21e41c7e8306",
+    "Assets/Scripts/EconomyV2/ClientEconomySession.cs": "11a301831d163d8caf32cd151703589e2bdea2d88ff8d61b4a56ed8821a64025",
+    "Assets/Scripts/EconomyV2/EconomyData.cs": "ed9edb6e9f2cb717a4d057696fb22e0f17875f4557c828c9c49da161410d4e33",
+    "Assets/Scripts/EconomyV2/HatchPresentationPolicy.cs": "6fe066900561a8aa1aae5d979713929d09a70fb38c46df5359c2ee81429b17bf",
+    "Assets/Scripts/EconomyV2/SerialTooltipState.cs": "d937f3f3be685b01f9d4172f355c05620904fe632185c5f6f85b0e757ae9fd40",
+    "ServerSources/ClientEconomyFacade.cs": "e5bfbc3b53e9c3478a73a6122b369069828b76f9d704db8360a186469db27917",
+    "ServerSources/EconomyContracts.cs": "c96951cd0eee9c8a31728e81774a645664bb7238dc5fb024b6272e43a58ce431",
+    "ServerSources/EconomyService.cs": "326c38af497d0c7bd18aa1d6aadde81086d43dd3a969c3defe55a18c95b36dd1",
+    "ServerSources/PetTradeService.cs": "6c7ae63765bf33c298996f21347962376d08f15aea5239f8ac0ff3b04f98b9a3",
+    "ServerSources/ServerPetService.cs": "50f3d166d5b803377f7890f4791bc7743742dae9061b185dcb1a18ff27c0471d",
+    "ServerSources/Testing/InMemoryWorldStore.cs": "8e8d93db226deb5fda990d467c85083e2884597af470b3b2a15e4848499c7e9c",
+    "ServerSources/Testing/PetTradeMockScenario.cs": "f4078384ffcc2baec9653319716f899df469833204d753f6a6738d4f8a593f0f",
+    "ServerSources/WorldContracts.cs": "5a6f6b5c37773f73fbe307a6b402a50f7b412869e7080c29bdf6928118187051"
+  }
+}

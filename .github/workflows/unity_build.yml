@@ -1,0 +1,75 @@
+name: Unity cloud Android Development build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'Assets/**'
+      - 'Packages/**'
+      - 'ProjectSettings/**'
+      - '.github/workflows/unity_build.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: unity-cloud-${{ github.ref }}
+  cancel-in-progress: false # Do not interrupt license return/build cleanup.
+
+jobs:
+  android:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    env:
+      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+      UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+      UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Validate license configuration without printing secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$UNITY_EMAIL" || { echo 'Missing UNITY_EMAIL secret'; exit 1; }
+          test -n "$UNITY_PASSWORD" || { echo 'Missing UNITY_PASSWORD secret'; exit 1; }
+          if [[ -z "$UNITY_LICENSE" && -z "$UNITY_SERIAL" ]]; then
+            echo 'Configure UNITY_LICENSE (.ulf contents) OR UNITY_SERIAL (eligible Pro license).'; exit 1
+          fi
+          if [[ -n "$UNITY_LICENSE" && -n "$UNITY_SERIAL" ]]; then
+            echo 'Choose one activation mode: UNITY_LICENSE or UNITY_SERIAL.'; exit 1
+          fi
+      - name: Restore packages, compile, configure URP and build Development APK
+        uses: game-ci/unity-builder@4423ee75828dff56037d1d1cfdac6b68e3a6ba00 # verified v4 ref
+        with:
+          projectPath: .
+          unityVersion: 6000.3.26f1
+          customImage: unityci/editor:ubuntu-6000.3.26f1-android-3
+          targetPlatform: Android
+          buildMethod: FusionTamagotchi.EditorTools.BuildAutomation.BuildAndroid
+          versioning: None
+      - name: Require actual configuration and APK output
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s Builds/Android/Neulgui-development.apk
+          test -s Validation/NativeUnity/configured.json
+          grep -q '^Succeeded;' Validation/NativeUnity/android-build-result.txt
+      - name: Upload Development APK
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: Neulgui-Android-development
+          path: Builds/Android/Neulgui-development.apk
+          if-no-files-found: error
+      - name: Upload build result records
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: Neulgui-cloud-build-records
+          path: |
+            Validation/NativeUnity/configured.json
+            Validation/NativeUnity/android-build-result.txt
+          if-no-files-found: ignore

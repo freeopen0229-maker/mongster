@@ -1,0 +1,5 @@
+{
+  "scope": "Packaged SQL executed against SQLite fixtures only; no production DB",
+  "checks": 10,
+  "status": "PASS"
+}

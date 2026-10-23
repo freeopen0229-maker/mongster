@@ -1,0 +1,5 @@
+{
+  "scope": "Temporary SQLite fixtures only. No production/user DB accessed. Pet migration remains blocked.",
+  "checks": 15,
+  "result": "PASS"
+}

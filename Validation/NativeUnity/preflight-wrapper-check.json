@@ -1,0 +1,7 @@
+{
+  "scope": "Wrapper rejection path only, not Unity compilation",
+  "exitCode": 1,
+  "existingEditorLogPreserved": true,
+  "blockedStageRecordWritten": true,
+  "result": "PASS"
+}
