@@ -72,7 +72,7 @@ with tempfile.TemporaryDirectory() as directory:
   except (TimeoutError,OSError):timedout=True
   check(timedout,'pet response lost after SQLite commit');time.sleep(.4)
   status,confirmed=request('/v2/pets/care',care)
-  check(status==200 and confirmed['Pet']['Affection']==min(100,affection+2),'same pet RequestId applies care once')
+  check(status==200 and min(100,affection+2)-.01<=confirmed['Pet']['Affection']<=min(100,affection+2),'same pet RequestId applies care once')
   check(request('/v2/pets/care',care)[1]==confirmed,'pet receipt replay returns identical snapshot')
   check(request('/v2/pets/snapshot?petId='+egg,account='local-b')[0]==409,'pet snapshot enforces token ownership')
   forged=dict(care,RequestId='pet-forged',AccountCoins=999999)

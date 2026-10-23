@@ -38,7 +38,8 @@ namespace Mongle.Slice.Client
         public Task<bool> ClaimIdleAsync()=>Command(PetCommandKind.ClaimIdle,CareAction.Pet);
         public Task<bool> StartExplorationAsync()=>Command(PetCommandKind.StartExploration,CareAction.Pet);
         public Task<bool> FinishExplorationAsync()=>Command(PetCommandKind.FinishExploration,CareAction.Pet);
-        public Task<bool> RetryPendingAsync()=>Run(async s=>{await s.RetryAsync(lifetime.Token);await s.RefreshAsync(lifetime.Token);});
+        public Task<bool> RetryPendingAsync()
+        {var token=lifetime?.Token??new CancellationToken(true);return Run(async s=>{await s.RetryAsync(token);token.ThrowIfCancellationRequested();await s.RefreshAsync(token);});}
         Task<bool> Command(PetCommandKind kind,CareAction action)
         {
             if(!storageValid)return Task.FromResult(false);
