@@ -1,3 +1,5 @@
+> **바로 실행하는 개발 체험:** 서버/로그인 설정이 없는 Development APK는 명시적인 오프라인 체험으로 시작합니다. 펫 돌봄, 먹이 구매, 조이스틱 이동, 공격/회피, 3개 탐험 지역과 로컬 체험 저장을 제공합니다. 온라인 계정·재화로 이전되지 않습니다. 온라인 운영 서버/소셜 SDK 및 전체 콘텐츠 완성을 의미하지 않습니다. [실행 안내](Docs/PLAYABLE_DEVELOPMENT_PREVIEW.md)
+
 > **현재 메인 게임 전환:** [MAIN_GAME_SERVER_LOOP.md](Docs/MAIN_GAME_SERVER_LOOP.md). 빌드 시작 씬은 커밋된 `Assets/Scenes/MainGame.unity`로 고정됩니다. 서버 권한 돌봄·탐험과 동일 RequestId 재확인을 연결했습니다. 외부 API 주소와 실제 로그인 제공자는 아직 등록되지 않아 온라인 플레이 연결은 미완료입니다. 아래 실행 보고서는 각 이전 버전의 기록입니다.
 
 > **Current cloud/server delivery:** [GAMECI_AND_SERVER_FINAL_REPORT.md](Docs/GAMECI_AND_SERVER_FINAL_REPORT.md). Local Unity Editor attempts stopped. GitHub-hosted GameCI Android workflow and SQLite SQL package prepared. Current Player/Editor offline Roslyn API compilation and core scenarios passed. Remote activation/build, APK, Play Mode and production migration remain NOT RUN. Older reports below are historical.

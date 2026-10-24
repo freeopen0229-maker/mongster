@@ -16,6 +16,13 @@ namespace FusionTamagotchi.Client
         void Awake()
         {
             Application.targetFrameRate=60;
+            // A clearly labelled, separate sandbox keeps development APKs playable before backend setup.
+            bool configured=false;
+            try{NetworkConfig.Load();configured=loginProvider!=null;}catch(Exception){configured=false;}
+            if(Debug.isDebugBuild&&!configured)
+            {
+                gameObject.AddComponent<OfflineGamePreview>();enabled=false;return;
+            }
             var camera=new GameObject("Main Camera").AddComponent<Camera>();camera.tag="MainCamera";camera.orthographic=true;camera.orthographicSize=4;camera.transform.position=new Vector3(0,0,-10);camera.backgroundColor=new Color(.1f,.18f,.2f);camera.clearFlags=CameraClearFlags.SolidColor;camera.gameObject.AddComponent<AudioListener>();
             // Add services inactive so all lifecycle subscriptions see assigned references on enable.
             var services=new GameObject("Server Session");services.SetActive(false);

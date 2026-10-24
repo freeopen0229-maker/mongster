@@ -40,7 +40,8 @@ namespace FusionTamagotchi.EditorTools
             for(int i=0;i<QualitySettings.names.Length;i++){QualitySettings.SetQualityLevel(i,false);QualitySettings.renderPipeline=pipeline;}
             QualitySettings.SetQualityLevel(selected,false);
             PlayerSettings.companyName="FusionTamagotchi";PlayerSettings.productName="Neulgui Development";
-            PlayerSettings.bundleVersion="0.1.0";
+            PlayerSettings.bundleVersion="0.2.0";
+            PlayerSettings.Android.bundleVersionCode=2;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android,"com.fusiontamagotchi.neulgui.dev");
             PlayerSettings.defaultScreenWidth=1080;PlayerSettings.defaultScreenHeight=1920;
             PlayerSettings.defaultInterfaceOrientation=UIOrientation.Portrait;

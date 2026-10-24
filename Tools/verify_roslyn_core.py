@@ -23,7 +23,7 @@ def compile(name,sources,refs=(),defines='',exe=False):
     records.append({'name':name+'Compile','exitCode':result.returncode,'output':result.stdout+result.stderr})
     print(name,result.returncode,result.stdout+result.stderr)
     return result.returncode,target
-for name in ['EconomyV2Probe','SliceProbe','ClientEconomyProbe','HatchPresentationProbe','PetLoopProbe']:
+for name in ['EconomyV2Probe','SliceProbe','ClientEconomyProbe','HatchPresentationProbe','PetLoopProbe','OfflinePreviewProbe']:
     code,exe=compile(name,domain+[root/'Tools'/(name+'.cs')],exe=True)
     if code:break
     result=subprocess.run([str(mono),str(exe)],capture_output=True,text=True)
